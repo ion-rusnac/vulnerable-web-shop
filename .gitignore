@@ -11,3 +11,6 @@ wheels/
 
 # MacOS specific files
 .DS_Store
+
+# Flask files
+flask_session/
