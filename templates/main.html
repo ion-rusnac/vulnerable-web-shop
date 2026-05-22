@@ -4,205 +4,45 @@
 <section class="py-5" id="shop">
   <div class="container px-4 px-lg-5 mt-5">
     <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+      {% for product in products %}
       <div class="col mb-5">
         <div class="card h-100 shadow-sm border-0">
-          <!-- Product image-->
-          <img class="card-img-top"
-            src="https://images.unsplash.com/photo-1593305841991-05c297ba4575?auto=format&fit=crop&q=80&w=450&h=300"
-            alt="Articulated Crystal Dragon" />
-          <!-- Product details-->
+          {% if product.badge %}
+          <!-- Sale / promo badge -->
+          <div class="badge {{ product.badge_color }} text-white position-absolute" style="top: 0.5rem; right: 0.5rem">
+            {{ product.badge }}
+          </div>
+          {% endif %}
+          <!-- Product image -->
+          <img class="card-img-top" src="{{ product.image }}" alt="{{ product.alt }}" />
+          <!-- Product details -->
           <div class="card-body p-4">
             <div class="text-center">
-              <!-- Product name-->
-              <h5 class="fw-bolder">Articulated Dragon</h5>
-              <!-- Product price-->
-              $35.00
-            </div>
-          </div>
-          <!-- Product actions-->
-          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-            <div class="text-center"><a class="btn btn-outline-primary mt-auto" href="#">Add to Cart</a></div>
-          </div>
-        </div>
-      </div>
-      <div class="col mb-5">
-        <div class="card h-100 shadow-sm border-0">
-          <!-- Sale badge-->
-          <div class="badge bg-primary text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Hot</div>
-          <!-- Product image-->
-          <img class="card-img-top"
-            src="https://images.unsplash.com/photo-1558060370-d644479cb6f7?auto=format&fit=crop&q=80&w=450&h=300"
-            alt="Flexi Octopus" />
-          <!-- Product details-->
-          <div class="card-body p-4">
-            <div class="text-center">
-              <!-- Product name-->
-              <h5 class="fw-bolder">Flexi Octopus</h5>
-              <!-- Product reviews-->
+              <!-- Product name -->
+              <h5 class="fw-bolder">{{ product.name }}</h5>
+              {% if product.rating %}
+              <!-- Star rating -->
               <div class="d-flex justify-content-center small text-warning mb-2">
+                {% for _ in range(product.rating) %}
                 <div class="bi-star-fill"></div>
-                <div class="bi-star-fill"></div>
-                <div class="bi-star-fill"></div>
-                <div class="bi-star-fill"></div>
-                <div class="bi-star-fill"></div>
+                {% endfor %}
               </div>
-              <!-- Product price-->
-              $15.00
+              {% endif %}
+              <!-- Product price -->
+              ${{ "%.2f"|format(product.price) }}
             </div>
           </div>
-          <!-- Product actions-->
+          <!-- Product actions -->
           <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-            <div class="text-center"><a class="btn btn-outline-primary mt-auto" href="#">Add to Cart</a></div>
-          </div>
-        </div>
-      </div>
-      <div class="col mb-5">
-        <div class="card h-100 shadow-sm border-0">
-          <!-- Product image-->
-          <img class="card-img-top"
-            src="https://images.unsplash.com/photo-1532330393533-443990a51d10?auto=format&fit=crop&q=80&w=450&h=300"
-            alt="Low-Poly T-Rex" />
-          <!-- Product details-->
-          <div class="card-body p-4">
             <div class="text-center">
-              <!-- Product name-->
-              <h5 class="fw-bolder">Low-Poly T-Rex</h5>
-              <!-- Product price-->
-              $22.00
+              <a class="btn btn-outline-primary mt-auto" href="#">{{ product.action }}</a>
             </div>
-          </div>
-          <!-- Product actions-->
-          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-            <div class="text-center"><a class="btn btn-outline-primary mt-auto" href="#">Add to Cart</a></div>
           </div>
         </div>
       </div>
-      <div class="col mb-5">
-        <div class="card h-100 shadow-sm border-0">
-          <!-- Product image-->
-          <img class="card-img-top"
-            src="https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?auto=format&fit=crop&q=80&w=450&h=300"
-            alt="Custom D&D Mini" />
-          <!-- Product details-->
-          <div class="card-body p-4">
-            <div class="text-center">
-              <!-- Product name-->
-              <h5 class="fw-bolder">Custom D&D Mini</h5>
-              <!-- Product reviews-->
-              <div class="d-flex justify-content-center small text-warning mb-2">
-                <div class="bi-star-fill"></div>
-                <div class="bi-star-fill"></div>
-                <div class="bi-star-fill"></div>
-                <div class="bi-star-fill"></div>
-                <div class="bi-star-fill"></div>
-              </div>
-              <!-- Product price-->
-              $45.00
-            </div>
-          </div>
-          <!-- Product actions-->
-          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-            <div class="text-center"><a class="btn btn-outline-primary mt-auto" href="#">Configure</a></div>
-          </div>
-        </div>
-      </div>
-      <div class="col mb-5">
-        <div class="card h-100 shadow-sm border-0">
-          <!-- Sale badge-->
-          <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">New</div>
-          <!-- Product image-->
-          <img class="card-img-top"
-            src="https://images.unsplash.com/photo-1566131444841-9442f360c704?auto=format&fit=crop&q=80&w=450&h=300"
-            alt="Robot Action Figure" />
-          <!-- Product details-->
-          <div class="card-body p-4">
-            <div class="text-center">
-              <!-- Product name-->
-              <h5 class="fw-bolder">Robot Explorer</h5>
-              <!-- Product price-->
-              $28.00
-            </div>
-          </div>
-          <!-- Product actions-->
-          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-            <div class="text-center"><a class="btn btn-outline-primary mt-auto" href="#">Add to Cart</a></div>
-          </div>
-        </div>
-      </div>
-      <div class="col mb-5">
-        <div class="card h-100 shadow-sm border-0">
-          <!-- Product image-->
-          <img class="card-img-top"
-            src="https://images.unsplash.com/photo-1587654538522-6bcd2483b1db?auto=format&fit=crop&q=80&w=450&h=300"
-            alt="Puzzle Cube" />
-          <!-- Product details-->
-          <div class="card-body p-4">
-            <div class="text-center">
-              <!-- Product name-->
-              <h5 class="fw-bolder">Puzzle Cube</h5>
-              <!-- Product price-->
-              $18.00
-            </div>
-          </div>
-          <!-- Product actions-->
-          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-            <div class="text-center"><a class="btn btn-outline-primary mt-auto" href="#">Add to Cart</a></div>
-          </div>
-        </div>
-      </div>
-      <div class="col mb-5">
-        <div class="card h-100 shadow-sm border-0">
-          <!-- Sale badge-->
-          <div class="badge bg-primary text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Limited</div>
-          <!-- Product image-->
-          <img class="card-img-top"
-            src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&q=80&w=450&h=300"
-            alt="Spaceship Model" />
-          <!-- Product details-->
-          <div class="card-body p-4">
-            <div class="text-center">
-              <!-- Product name-->
-              <h5 class="fw-bolder">Spaceship Model</h5>
-              <!-- Product reviews-->
-              <div class="d-flex justify-content-center small text-warning mb-2">
-                <div class="bi-star-fill"></div>
-                <div class="bi-star-fill"></div>
-                <div class="bi-star-fill"></div>
-                <div class="bi-star-fill"></div>
-                <div class="bi-star-fill"></div>
-              </div>
-              <!-- Product price-->
-              $55.00
-            </div>
-          </div>
-          <!-- Product actions-->
-          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-            <div class="text-center"><a class="btn btn-outline-primary mt-auto" href="#">Add to Cart</a></div>
-          </div>
-        </div>
-      </div>
-      <div class="col mb-5">
-        <div class="card h-100 shadow-sm border-0">
-          <!-- Product image-->
-          <img class="card-img-top"
-            src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&q=80&w=450&h=300"
-            alt="Medieval Castle Set" />
-          <!-- Product details-->
-          <div class="card-body p-4">
-            <div class="text-center">
-              <!-- Product name-->
-              <h5 class="fw-bolder">Medieval Castle</h5>
-              <!-- Product price-->
-              $75.00
-            </div>
-          </div>
-          <!-- Product actions-->
-          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-            <div class="text-center"><a class="btn btn-outline-primary mt-auto" href="#">Add to Cart</a></div>
-          </div>
-        </div>
-      </div>
+      {% endfor %}
     </div>
   </div>
 </section>
 {% endblock %}
+
