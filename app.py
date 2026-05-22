@@ -92,8 +92,25 @@ products = [
         "action": "Add to Cart",
     },
 ]
+personalProducts = [
+    {
+        "name": "Articulated Dragon",
+        "price": 35.00,
+        "image": "https://images.unsplash.com/photo-1593305841991-05c297ba4575?auto=format&fit=crop&q=80&w=450&h=300",
+        "alt": "Articulated Crystal Dragon",
+        "badge": None,
+        "badge_color": None,
+        "rating": 0,
+        "action": "Add to Cart",
+    },
+]
 
 
 @app.route("/", methods=["GET"])
 def index():
     return render_template("main.html", products=products)
+
+
+@app.route("/cart", methods=["GET"])
+def cart():
+    return render_template("cart.html", personalProducts=personalProducts)
