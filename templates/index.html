@@ -55,7 +55,6 @@
         <a class="btn btn-outline-dark" href="/cart">  
           <i class="bi-cart-fill me-1"></i>
           Cart
-          <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
         </a>
       </div>
     </div>
@@ -72,6 +71,18 @@
     </div>
   </header>
   <!-- Section-->
+  <div class="container mt-3">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+  </div>
   {% block content %}{% endblock %}
   <!-- Footer-->
   <footer class="py-5 bg-dark">

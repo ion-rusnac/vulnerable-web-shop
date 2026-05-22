@@ -1,0 +1,19 @@
+{% extends 'index.html' %}
+{% block title %}Order Confirmed{% endblock %}
+{% block content %}
+<section class="py-5" id="checkout-success">
+  <div class="container px-4 px-lg-5 mt-3">
+    <div class="text-center py-5">
+      <i class="bi bi-check-circle-fill text-success" style="font-size: 4rem;"></i>
+      <h2 class="fw-bolder mt-3">Thank You for Your Order!</h2>
+      <p class="text-muted fs-5 mt-2">Your order <strong>#{{ order_id }}</strong> has been placed successfully.</p>
+      <p class="fs-5">Total charged: <strong>${{ "%.2f"|format(total * 1.1) }}</strong> (incl. tax)</p>
+      <hr class="my-4 mx-auto" style="max-width: 200px;" />
+      <p class="text-muted">You will receive a confirmation shortly.</p>
+      <a href="/" class="btn btn-primary mt-3">
+        <i class="bi bi-shop me-1"></i> Continue Shopping
+      </a>
+    </div>
+  </div>
+</section>
+{% endblock %}
