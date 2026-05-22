@@ -1,292 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="Premium 3D printed toys and custom collectibles." />
-        <meta name="author" content="PrintyToys" />
-        <title>PrintyToys - Custom 3D Printed Toys Shop</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Bootstrap core CSS-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-        <!-- Bootstrap icons-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap overrides)-->
-        <link href="css/styles.css" rel="stylesheet" />
-        <style>
-            .hero-section {
-                background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1634128221889-82ed6efdfac3?auto=format&fit=crop&q=80&w=1500&h=600');
-                background-size: cover;
-                background-position: center;
-            }
-            .card-img-top {
-                height: 200px;
-                object-fit: cover;
-            }
-        </style>
-    </head>
-    <body>
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm sticky-top">
-            <div class="container px-4 px-lg-5">
-                <a class="navbar-brand fw-bold" href="#!">PrintyToys</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#!">All Toys</a></li>
-                                <li><hr class="dropdown-divider" /></li>
-                                <li><a class="dropdown-item" href="#!">Articulated</a></li>
-                                <li><a class="dropdown-item" href="#!">Custom Minis</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <form class="d-flex">
-                        <button class="btn btn-outline-dark" type="submit">
-                            <i class="bi-cart-fill me-1"></i>
-                            Cart
-                            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </nav>
-        <!-- Header-->
-        <header class="hero-section py-5">
-            <div class="container px-4 px-lg-5 my-5">
-                <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder">Bring Your Imagination to Life</h1>
-                    <p class="lead fw-normal text-white-50 mb-4">Premium 3D printed toys, articulated dragons, and custom collectibles.</p>
-                    <a class="btn btn-primary btn-lg px-4 me-sm-3" href="#shop">Shop Now</a>
-                </div>
-            </div>
-        </header>
-        <!-- Section-->
-        <section class="py-5" id="shop">
-            <div class="container px-4 px-lg-5 mt-5">
-                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                    <div class="col mb-5">
-                        <div class="card h-100 shadow-sm border-0">
-                            <!-- Product image-->
-                            <img class="card-img-top" src="https://images.unsplash.com/photo-1593305841991-05c297ba4575?auto=format&fit=crop&q=80&w=450&h=300" alt="Articulated Crystal Dragon" />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">Articulated Dragon</h5>
-                                    <!-- Product price-->
-                                    $35.00
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-primary mt-auto" href="#">Add to Cart</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col mb-5">
-                        <div class="card h-100 shadow-sm border-0">
-                            <!-- Sale badge-->
-                            <div class="badge bg-primary text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Hot</div>
-                            <!-- Product image-->
-                            <img class="card-img-top" src="https://images.unsplash.com/photo-1558060370-d644479cb6f7?auto=format&fit=crop&q=80&w=450&h=300" alt="Flexi Octopus" />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">Flexi Octopus</h5>
-                                    <!-- Product reviews-->
-                                    <div class="d-flex justify-content-center small text-warning mb-2">
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                    </div>
-                                    <!-- Product price-->
-                                    $15.00
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-primary mt-auto" href="#">Add to Cart</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col mb-5">
-                        <div class="card h-100 shadow-sm border-0">
-                            <!-- Product image-->
-                            <img class="card-img-top" src="https://images.unsplash.com/photo-1532330393533-443990a51d10?auto=format&fit=crop&q=80&w=450&h=300" alt="Low-Poly T-Rex" />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">Low-Poly T-Rex</h5>
-                                    <!-- Product price-->
-                                    $22.00
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-primary mt-auto" href="#">Add to Cart</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col mb-5">
-                        <div class="card h-100 shadow-sm border-0">
-                            <!-- Product image-->
-                            <img class="card-img-top" src="https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?auto=format&fit=crop&q=80&w=450&h=300" alt="Custom D&D Mini" />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">Custom D&D Mini</h5>
-                                    <!-- Product reviews-->
-                                    <div class="d-flex justify-content-center small text-warning mb-2">
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                    </div>
-                                    <!-- Product price-->
-                                    $45.00
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-primary mt-auto" href="#">Configure</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col mb-5">
-                        <div class="card h-100 shadow-sm border-0">
-                            <!-- Sale badge-->
-                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">New</div>
-                            <!-- Product image-->
-                            <img class="card-img-top" src="https://images.unsplash.com/photo-1566131444841-9442f360c704?auto=format&fit=crop&q=80&w=450&h=300" alt="Robot Action Figure" />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">Robot Explorer</h5>
-                                    <!-- Product price-->
-                                    $28.00
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-primary mt-auto" href="#">Add to Cart</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col mb-5">
-                        <div class="card h-100 shadow-sm border-0">
-                            <!-- Product image-->
-                            <img class="card-img-top" src="https://images.unsplash.com/photo-1587654538522-6bcd2483b1db?auto=format&fit=crop&q=80&w=450&h=300" alt="Puzzle Cube" />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">Puzzle Cube</h5>
-                                    <!-- Product price-->
-                                    $18.00
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-primary mt-auto" href="#">Add to Cart</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col mb-5">
-                        <div class="card h-100 shadow-sm border-0">
-                            <!-- Sale badge-->
-                            <div class="badge bg-primary text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Limited</div>
-                            <!-- Product image-->
-                            <img class="card-img-top" src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&q=80&w=450&h=300" alt="Spaceship Model" />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">Spaceship Model</h5>
-                                    <!-- Product reviews-->
-                                    <div class="d-flex justify-content-center small text-warning mb-2">
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                        <div class="bi-star-fill"></div>
-                                    </div>
-                                    <!-- Product price-->
-                                    $55.00
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-primary mt-auto" href="#">Add to Cart</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col mb-5">
-                        <div class="card h-100 shadow-sm border-0">
-                            <!-- Product image-->
-                            <img class="card-img-top" src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&q=80&w=450&h=300" alt="Medieval Castle Set" />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">Medieval Castle</h5>
-                                    <!-- Product price-->
-                                    $75.00
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-primary mt-auto" href="#">Add to Cart</a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Footer-->
-        <footer class="py-5 bg-dark">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4 mb-3 text-white">
-                        <h5 class="fw-bold">PrintyToys</h5>
-                        <p class="small text-white-50">Bringing your imagination to life, one layer at a time. High-quality 3D printed toys and collectibles for all ages.</p>
-                    </div>
-                    <div class="col-md-4 mb-3 text-white">
-                        <h5 class="fw-bold">Quick Links</h5>
-                        <ul class="list-unstyled small text-white-50">
-                            <li><a href="#!" class="text-white-50 text-decoration-none">Privacy Policy</a></li>
-                            <li><a href="#!" class="text-white-50 text-decoration-none">Terms of Service</a></li>
-                            <li><a href="#!" class="text-white-50 text-decoration-none">Contact Us</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-4 mb-3 text-white">
-                        <h5 class="fw-bold">Follow Us</h5>
-                        <div class="d-flex">
-                            <a href="#!" class="text-white me-3"><i class="bi bi-facebook"></i></a>
-                            <a href="#!" class="text-white me-3"><i class="bi bi-instagram"></i></a>
-                            <a href="#!" class="text-white me-3"><i class="bi bi-twitter"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <hr class="bg-white opacity-25" />
-                <p class="m-0 text-center text-white">Copyright &copy; PrintyToys 2026</p>
-            </div>
-        </footer>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
-    </body>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="description" content="Premium 3D printed toys and custom collectibles." />
+  <meta name="author" content="PrintyToys" />
+  <title>PrintyToys - {% block title %}{% endblock %}</title>
+  <!-- Favicon-->
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <!-- Bootstrap core CSS-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap icons-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+  <!-- Core theme CSS (includes Bootstrap overrides)-->
+  <link href="css/styles.css" rel="stylesheet" />
+  <style>
+    .hero-section {
+      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1634128221889-82ed6efdfac3?auto=format&fit=crop&q=80&w=1500&h=600');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .card-img-top {
+      height: 200px;
+      object-fit: cover;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navigation-->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm sticky-top">
+    <div class="container px-4 px-lg-5">
+      <a class="navbar-brand fw-bold" href="#!">PrintyToys</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
+          class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+          <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">Shop</a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#!">All Toys</a></li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li><a class="dropdown-item" href="#!">Articulated</a></li>
+              <li><a class="dropdown-item" href="#!">Custom Minis</a></li>
+            </ul>
+          </li>
+        </ul>
+        <form class="d-flex">
+          <button class="btn btn-outline-dark" type="submit">
+            <i class="bi-cart-fill me-1"></i>
+            Cart
+            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </nav>
+  <!-- Header-->
+  <header class="hero-section py-5">
+    <div class="container px-4 px-lg-5 my-5">
+      <div class="text-center text-white">
+        <h1 class="display-4 fw-bolder">Bring Your Imagination to Life</h1>
+        <p class="lead fw-normal text-white-50 mb-4">Premium 3D printed toys, articulated dragons, and custom
+          collectibles.</p>
+        <a class="btn btn-primary btn-lg px-4 me-sm-3" href="#shop">Shop Now</a>
+      </div>
+    </div>
+  </header>
+  <!-- Section-->
+  {% block content %}{% endblock %}
+  <!-- Footer-->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 mb-3 text-white">
+          <h5 class="fw-bold">PrintyToys</h5>
+          <p class="small text-white-50">Bringing your imagination to life, one layer at a time. High-quality 3D printed
+            toys and collectibles for all ages.</p>
+        </div>
+        <div class="col-md-4 mb-3 text-white">
+          <h5 class="fw-bold">Quick Links</h5>
+          <ul class="list-unstyled small text-white-50">
+            <li><a href="#!" class="text-white-50 text-decoration-none">Privacy Policy</a></li>
+            <li><a href="#!" class="text-white-50 text-decoration-none">Terms of Service</a></li>
+            <li><a href="#!" class="text-white-50 text-decoration-none">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4 mb-3 text-white">
+          <h5 class="fw-bold">Follow Us</h5>
+          <div class="d-flex">
+            <a href="#!" class="text-white me-3"><i class="bi bi-facebook"></i></a>
+            <a href="#!" class="text-white me-3"><i class="bi bi-instagram"></i></a>
+            <a href="#!" class="text-white me-3"><i class="bi bi-twitter"></i></a>
+          </div>
+        </div>
+      </div>
+      <hr class="bg-white opacity-25" />
+      <p class="m-0 text-center text-white">Copyright &copy; PrintyToys 2026</p>
+    </div>
+  </footer>
+  <!-- Bootstrap core JS-->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Core theme JS-->
+  <script src="js/scripts.js"></script>
+</body>
+
 </html>
