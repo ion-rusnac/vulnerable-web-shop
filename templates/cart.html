@@ -24,8 +24,7 @@
             <div class="row align-items-center {% if not loop.last %}border-bottom{% endif %} py-3">
               <!-- Product image + name -->
               <div class="col-md-5 d-flex align-items-center mb-3 mb-md-0">
-                <img src="{{ item.image }}" alt="{{ item.alt }}" class="rounded me-3"
-                  style="width: 80px; height: 80px; object-fit: cover;" />
+                <img src="{{ url_for('static', filename=item.image) }}" alt="{{ item.alt }}" class="rounded me-3" style="width: 80px; height: 80px; object-fit: cover; object-position: center;" />
                 <div>
                   <h6 class="fw-bold mb-0">{{ item.name }}</h6>
                   {% if item.badge %}
