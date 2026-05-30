@@ -1,0 +1,118 @@
+{% extends 'index.html' %}
+{% block title %}Admin Backdoor Dashboard{% endblock %}
+{% block content %}
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="row mb-4">
+      <div class="col">
+        <h1 class="display-4 text-danger"><i class="bi bi-shield-lock-fill"></i> Secret Admin Panel</h1>
+        <p class="lead text-muted">Welcome to the undocumented backdoor. From here you can access raw database records and modify shop products.</p>
+      </div>
+    </div>
+
+    <!-- Products Section -->
+    <div class="card shadow-sm mb-5 border-danger">
+      <div class="card-header bg-danger text-white">
+        <h3 class="mb-0">Modify Products</h3>
+      </div>
+      <div class="card-body p-0 table-responsive">
+        <table class="table table-striped table-hover mb-0 align-middle">
+          <thead class="table-dark">
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Current Price</th>
+              <th>Current Stock</th>
+              <th>Update Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for product in products %}
+            <tr>
+              <td>{{ product.id }}</td>
+              <td class="fw-bold">{{ product.name }}</td>
+              <td>${{ "%.2f"|format(product.price) }}</td>
+              <td>{{ product.stock }}</td>
+              <td>
+                <form action="/admin/update_product/{{ product.id }}" method="POST" class="d-flex align-items-center gap-2">
+                  <input type="number" step="0.01" name="price" class="form-control form-control-sm" value="{{ product.price }}" required style="width: 100px;">
+                  <input type="number" name="stock" class="form-control form-control-sm" value="{{ product.stock }}" required style="width: 80px;">
+                  <button type="submit" class="btn btn-sm btn-outline-danger">Update</button>
+                </form>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Customers Section -->
+    <div class="card shadow-sm mb-5 border-warning">
+      <div class="card-header bg-warning text-dark">
+        <h3 class="mb-0">Customer Data Leak (Passwords exposed!)</h3>
+      </div>
+      <div class="card-body p-0 table-responsive">
+        <table class="table table-striped table-hover mb-0 align-middle">
+          <thead class="table-dark">
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th class="text-danger">Plaintext Password</th>
+              <th>Phone</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for customer in customers %}
+            <tr>
+              <td>{{ customer.id }}</td>
+              <td>{{ customer.first_name }} {{ customer.last_name }}</td>
+              <td><code>{{ customer.email }}</code></td>
+              <td class="text-danger fw-bold">{{ customer.password }}</td>
+              <td>{{ customer.phone }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Orders Section -->
+    <div class="card shadow-sm border-info">
+      <div class="card-header bg-info text-dark">
+        <h3 class="mb-0">Order History</h3>
+      </div>
+      <div class="card-body p-0 table-responsive">
+        <table class="table table-striped table-hover mb-0 align-middle">
+          <thead class="table-dark">
+            <tr>
+              <th>Order ID</th>
+              <th>Customer ID</th>
+              <th>Status</th>
+              <th>Total</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for order in orders %}
+            <tr>
+              <td>{{ order.id }}</td>
+              <td>{{ order.customer_id }}</td>
+              <td>
+                <span class="badge bg-{{ 'success' if order.status == 'delivered' else 'secondary' }}">
+                  {{ order.status }}
+                </span>
+              </td>
+              <td class="fw-bold">${{ "%.2f"|format(order.total) }}</td>
+              <td class="small text-muted">{{ order.created_at }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</section>
+{% endblock %}

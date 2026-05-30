@@ -1,4 +1,13 @@
-from flask import Flask, render_template, request, jsonify, redirect, url_for, session, flash
+from flask import (
+    Flask,
+    render_template,
+    request,
+    jsonify,
+    redirect,
+    url_for,
+    session,
+    flash,
+)
 from flask_session import Session
 import sqlite3
 
@@ -7,7 +16,6 @@ app = Flask(__name__)
 # Configure session to use filesystem (instead of signed cookies)
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
-app.secret_key = "super_secret_cart_key"
 Session(app)
 DATABASE = "shop.db"
 
@@ -21,6 +29,7 @@ def get_db():
 
 
 # ── Cart helpers ──────────────────────────────────────────────────────
+
 
 def get_cart():
     """Return the cart list stored in the session (creates it if missing)."""
@@ -36,6 +45,7 @@ def save_cart(cart):
 
 
 # ── Routes ────────────────────────────────────────────────────────────
+
 
 @app.route("/", methods=["GET"])
 def index():
@@ -107,6 +117,29 @@ def cart():
     return render_template("cart.html", personalProducts=personalProducts)
 
 
+@app.route("/admin", methods=["GET"])
+def admin():
+    con = get_db()
+    customers = con.execute("SELECT * FROM customers").fetchall()
+    orders = con.execute("SELECT * FROM orders").fetchall()
+    products = con.execute("SELECT * FROM products").fetchall()
+    con.close()
+    return render_template("admin.html", customers=customers, orders=orders, products=products)
+
+@app.route("/admin/update_product/<int:product_id>", methods=["POST"])
+def update_product(product_id):
+    price = request.form.get("price", type=float)
+    stock = request.form.get("stock", type=int)
+    
+    con = get_db()
+    con.execute("UPDATE products SET price = ?, stock = ? WHERE id = ?", (price, stock, product_id))
+    con.commit()
+    con.close()
+    
+    flash(f"Product #{product_id} updated successfully via backdoor!", "warning")
+    return redirect(url_for("admin"))
+
+
 @app.route("/checkout", methods=["POST"])
 def checkout():
     cart_items = get_cart()
@@ -149,4 +182,3 @@ def checkout():
     save_cart([])
 
     return render_template("checkout_success.html", order_id=order_id, total=total)
-
