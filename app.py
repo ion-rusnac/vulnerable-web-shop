@@ -166,18 +166,24 @@ def admin():
     orders = con.execute("SELECT * FROM orders").fetchall()
     products = con.execute("SELECT * FROM products").fetchall()
     con.close()
-    return render_template("admin.html", customers=customers, orders=orders, products=products)
+    return render_template(
+        "admin.html", customers=customers, orders=orders, products=products
+    )
+
 
 @app.route("/admin/update_product/<int:product_id>", methods=["POST"])
 def update_product(product_id):
     price = request.form.get("price", type=float)
     stock = request.form.get("stock", type=int)
-    
+
     con = get_db()
-    con.execute("UPDATE products SET price = ?, stock = ? WHERE id = ?", (price, stock, product_id))
+    con.execute(
+        "UPDATE products SET price = ?, stock = ? WHERE id = ?",
+        (price, stock, product_id),
+    )
     con.commit()
     con.close()
-    
+
     flash(f"Product #{product_id} updated successfully via backdoor!", "warning")
     return redirect(url_for("admin"))
 
@@ -198,6 +204,20 @@ def checkout():
         ).fetchone()
         if row:
             total += row["price"] * entry["quantity"]
+
+    # Check balance from session
+    if "balance" not in session:
+        session["balance"] = 0.0
+    balance = session["balance"]
+
+    if balance < total:
+        con.close()
+        flash(f"Insufficient funds! You need ${total:.2f} but only have ${balance:.2f}. Please add money to your wallet.", "danger")
+        return redirect(url_for("cart"))
+
+    # Deduct balance
+    session["balance"] = balance - total
+    session.modified = True
 
     # Create order (customer_id = 1 as placeholder)
     cur = con.execute(
