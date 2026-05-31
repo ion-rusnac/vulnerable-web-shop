@@ -1,0 +1,57 @@
+{% extends 'index.html' %}
+{% block title %}My Wallet{% endblock %}
+
+{% block content %}
+<section class="py-5 min-vh-100">
+  <div class="container px-4 px-lg-5 mt-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-6 col-md-8">
+        <div class="card shadow-sm border-0 rounded-4">
+          <div class="card-body p-5 text-center">
+            <h2 class="fw-bolder mb-4">My Wallet</h2>
+            
+            <div class="display-4 text-success fw-bold mb-4">
+              ${{ "%.2f"|format(balance) }}
+            </div>
+            
+            <p class="text-muted mb-4">Your current available balance.</p>
+
+            <form action="/wallet" method="POST" class="bg-body-tertiary p-4 rounded-3 border text-start">
+              <h5 class="mb-3 text-center">Add Funds via Credit Card</h5>
+              
+              <div class="mb-3">
+                <label class="form-label text-muted small fw-bold">Card Number</label>
+                <input type="text" name="card_number" class="form-control" placeholder="0000 0000 0000 0000" pattern="[\d\s]{16,19}" required>
+              </div>
+
+              <div class="row mb-3">
+                <div class="col-6">
+                  <label class="form-label text-muted small fw-bold">Expiry Date</label>
+                  <input type="text" name="expiry" class="form-control" placeholder="MM/YY" pattern="\d{2}/\d{2}" required>
+                </div>
+                <div class="col-6">
+                  <label class="form-label text-muted small fw-bold">CVV</label>
+                  <input type="text" name="cvv" class="form-control" placeholder="123" pattern="\d{3,4}" required>
+                </div>
+              </div>
+
+              <div class="mb-4">
+                <label class="form-label text-muted small fw-bold">Amount to Add</label>
+                <div class="input-group">
+                  <span class="input-group-text bg-body-secondary">$</span>
+                  <input type="number" step="0.01" min="0.01" name="amount" class="form-control" placeholder="0.00" required>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-lg w-100 mt-2">
+                <i class="bi-credit-card me-1"></i> Process Payment
+              </button>
+            </form>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

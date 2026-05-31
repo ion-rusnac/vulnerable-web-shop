@@ -8,15 +8,14 @@ from flask import (
     session,
     flash,
 )
-from flask_session import Session
 import sqlite3
 
 app = Flask(__name__)
 
-# Configure session to use filesystem (instead of signed cookies)
+# Configure session to use default Flask signed cookies
+# VULNERABILITY: Weak secret key allows session forgery and exposes session data
+app.secret_key = "secret"
 app.config["SESSION_PERMANENT"] = False
-app.config["SESSION_TYPE"] = "filesystem"
-Session(app)
 DATABASE = "shop.db"
 
 
@@ -26,6 +25,12 @@ def get_db():
     con.row_factory = sqlite3.Row
     con.execute("PRAGMA foreign_keys = ON")
     return con
+
+@app.context_processor
+def inject_balance():
+    if "balance" not in session:
+        session["balance"] = 0.0
+    return dict(user_balance=session["balance"])
 
 
 # ── Cart helpers ──────────────────────────────────────────────────────
@@ -116,6 +121,26 @@ def cart():
     con.close()
     return render_template("cart.html", personalProducts=personalProducts)
 
+
+@app.route("/wallet", methods=["GET", "POST"])
+def wallet():
+    if request.method == "POST":
+        amount_str = request.form.get("amount", "0")
+        card_number = request.form.get("card_number")
+        expiry = request.form.get("expiry")
+        cvv = request.form.get("cvv")
+        
+        # Simulate payment processing failure regardless of the input data
+        if amount_str and card_number and expiry and cvv:
+            flash("Error processing payment: Bank declined the transaction. Please try another card or contact your bank.", "danger")
+        else:
+            flash("Please provide all required payment details.", "danger")
+            
+        return redirect(url_for("wallet"))
+    
+    if "balance" not in session:
+        session["balance"] = 0.0
+    return render_template("wallet.html", balance=session["balance"])
 
 @app.route("/admin", methods=["GET"])
 def admin():

@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS customers (
     address     TEXT,
     city        TEXT,
     country     TEXT    DEFAULT 'US',
+    balance     REAL    NOT NULL DEFAULT 0.0 CHECK (balance >= 0),
     created_at  TEXT    NOT NULL DEFAULT (datetime('now'))
 );
 
