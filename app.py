@@ -59,6 +59,23 @@ def index():
     con.close()
     return render_template("main.html", products=products)
 
+@app.route("/about", methods=["GET"])
+def about():
+    return render_template("about.html")
+
+@app.route("/items", methods=["GET"])
+@app.route("/items/filter=<category>", methods=["GET"])
+def items(category=None):
+    con = get_db()
+    if category == "articulated":
+        products = con.execute("SELECT * FROM products WHERE name LIKE '%Articulated%' OR name LIKE '%Flexi%'").fetchall()
+    elif category == "custom":
+        products = con.execute("SELECT * FROM products WHERE name LIKE '%Custom%'").fetchall()
+    else:
+        products = con.execute("SELECT * FROM products").fetchall()
+    con.close()
+    return render_template("main.html", products=products)
+
 
 @app.route("/add-to-cart/<int:product_id>")
 def add_to_cart(product_id):
