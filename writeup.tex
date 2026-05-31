@@ -1,0 +1,57 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+\usepackage{titlesec}
+\usepackage{xcolor}
+
+\title{\textbf{PrintyToys: Vulnerable Web Shop Project Report}}
+\author{Security Analysis Report}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+PrintyToys is a fictional e-commerce web application designed to sell premium 3D printed toys and custom collectibles. The platform includes a product catalog, a shopping cart, and a built-in wallet system that allows users to deposit funds using a credit card and subsequently use those funds to check out. 
+
+However, PrintyToys was intentionally designed with critical security flaws to serve as an educational Capture The Flag (CTF) / vulnerable application environment. The core focus of this project is to demonstrate the dangers of improper session management, weak cryptographic configurations, and misplaced trust in client-side data.
+
+\section{Attacker Objective}
+The primary objective for the attacker is to successfully purchase an item and reach the ``Order Success'' (checkout) page without legitimately depositing funds. 
+
+Because the wallet's credit card processing system is intentionally hardcoded to decline all transactions, a standard user can never legitimately acquire a positive balance. The attacker must discover how the application tracks the user's wallet balance, exploit the underlying session management vulnerability to artificially inflate their balance, and subsequently complete a purchase. The ``flag'' or win-state is the successful creation of an order in the database and the rendering of the checkout success screen.
+
+\section{Rules of Engagement}
+To maintain the integrity of the environment and focus on the intended educational outcomes, the following exploitation methods are strictly prohibited:
+\begin{itemize}
+    \item \textbf{Brute-Forcing:} Do not attempt to brute-force directories, files, or login credentials.
+    \item \textbf{Automated Scanners:} The use of automated vulnerability scanners (e.g., Nessus, Burp Suite Active Scanner, Nikto) is not permitted.
+    \item \textbf{Denial of Service (DoS):} Any attacks aimed at degrading the performance or availability of the application are forbidden.
+\end{itemize}
+The vulnerability can be found and exploited entirely through manual interaction, inspection of HTTP traffic, and standard cryptographic/session-manipulation tools (e.g., \texttt{flask-unsign}).
+
+\section{Vulnerability Classification}
+The primary vulnerabilities present in the PrintyToys application fall under the following classifications (referenced via Common Weakness Enumeration - CWE):
+
+\begin{itemize}
+    \item \textbf{CWE-798: Use of Hard-coded Credentials / Weak Cryptographic Key:} The Flask application uses an extremely weak, guessable \texttt{SECRET\_KEY} (``secret'').
+    \item \textbf{CWE-565: Reliance on Cookies without Validation and Integrity Checking:} Because the secret key is weak, the cryptographic signature of the session cookie can be easily forged.
+    \item \textbf{CWE-602: Client-Side Enforcement of Server-Side Security:} The application stores critical, sensitive state (the user's financial balance) within the client-side session cookie rather than maintaining a secure, authoritative ledger on the server-side database.
+\end{itemize}
+
+\section{Violated Defense Mechanisms}
+The architecture of PrintyToys violates several fundamental cybersecurity defense mechanisms and principles:
+
+\subsection{Cryptographic Integrity}
+Modern web frameworks like Flask store session data on the client side, relying on a cryptographic signature to ensure the data has not been tampered with. By using a weak \texttt{SECRET\_KEY}, the application violates the principle of cryptographic strength. An attacker can trivially crack the signature offline, modify the plaintext JSON payload containing their wallet balance, and resign the cookie to trick the server into accepting the forged data.
+
+\subsection{Zero Trust in Client-Side Data}
+A core tenet of secure application design is to never trust data originating from the client, especially concerning financial transactions, authorization, or privileges. By migrating the user's wallet balance from a secure, server-controlled database table into the client-side session cookie, the application inherently trusts the client to accurately report its own financial standing. 
+
+\subsection{Defense in Depth}
+The application lacks layered security. Even if the session cookies were used, a robust application would verify the session's claims against an independent backend ledger before authorizing a financial transaction. The absence of secondary validation means the single point of failure (the weak secret key) compromises the entire business logic of the shop.
+
+\end{document}
