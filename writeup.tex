@@ -22,7 +22,7 @@ However, PrintyToys was intentionally designed with critical security flaws to s
 \section{Attacker Objective}
 The primary objective for the attacker is to successfully purchase an item and reach the ``Order Success'' (checkout) page without legitimately depositing funds. 
 
-Because the wallet's credit card processing system is intentionally hardcoded to decline all transactions, a standard user can never legitimately acquire a positive balance. The attacker must discover how the application tracks the user's wallet balance, exploit the underlying session management vulnerability to artificially inflate their balance, and subsequently complete a purchase. The ``flag'' or win-state is the successful creation of an order in the database and the rendering of the checkout success screen.
+Because the wallet's credit card processing system is intentionally hardcoded to decline all transactions, a standard user can never legitimately acquire a positive balance. The attacker can achieve this objective through multiple paths: either by exploiting the underlying session management vulnerability to artificially inflate their balance, or by discovering the unprotected administrative endpoints to manipulate product prices. The ``flag'' or win-state is the successful creation of an order in the database and the rendering of the checkout success screen.
 
 \section{Rules of Engagement}
 To maintain the integrity of the environment and focus on the intended educational outcomes, the following exploitation methods are strictly prohibited:
@@ -40,6 +40,7 @@ The primary vulnerabilities present in the PrintyToys application fall under the
     \item \textbf{CWE-798: Use of Hard-coded Credentials / Weak Cryptographic Key:} The Flask application uses an extremely weak, guessable \texttt{SECRET\_KEY} (``secret'').
     \item \textbf{CWE-565: Reliance on Cookies without Validation and Integrity Checking:} Because the secret key is weak, the cryptographic signature of the session cookie can be easily forged.
     \item \textbf{CWE-602: Client-Side Enforcement of Server-Side Security:} The application stores critical, sensitive state (the user's financial balance) within the client-side session cookie rather than maintaining a secure, authoritative ledger on the server-side database.
+    \item \textbf{CWE-284/CWE-306: Improper Access Control / Missing Authentication for Critical Function:} The \texttt{/admin} and \texttt{/admin/update\_product} endpoints completely lack any authentication or authorization checks.
 \end{itemize}
 
 \section{Violated Defense Mechanisms}
@@ -53,5 +54,8 @@ A core tenet of secure application design is to never trust data originating fro
 
 \subsection{Defense in Depth}
 The application lacks layered security. Even if the session cookies were used, a robust application would verify the session's claims against an independent backend ledger before authorizing a financial transaction. The absence of secondary validation means the single point of failure (the weak secret key) compromises the entire business logic of the shop.
+
+\subsection{Principle of Least Privilege and Access Control}
+The application fails to enforce access controls on administrative endpoints. By leaving the \texttt{/admin} and associated product-update routes unprotected, any unauthenticated user can directly manipulate the database, such as altering product prices to \$0. This provides an alternative, trivial path to achieving the checkout win-state without requiring any complex session forgery.
 
 \end{document}
