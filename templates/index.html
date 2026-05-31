@@ -1,7 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="auto">
 
 <head>
+  <script>
+    // Apply theme as early as possible to prevent FOUC
+    const getPreferredTheme = () => {
+      const storedTheme = localStorage.getItem('theme')
+      if (storedTheme) {
+        return storedTheme
+      }
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+    }
+    document.documentElement.setAttribute('data-bs-theme', getPreferredTheme())
+  </script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta name="description" content="Premium 3D printed toys and custom collectibles." />
@@ -30,7 +41,7 @@
 
 <body>
   <!-- Navigation-->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm sticky-top">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary shadow-sm sticky-top">
     <div class="container px-4 px-lg-5">
       <a class="navbar-brand fw-bold" href="/">PrintyToys</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -53,10 +64,17 @@
             </ul>
           </li>
         </ul>
-        <a class="btn btn-outline-dark" href="/cart">  
+        <a class="btn btn-outline-success me-2" href="/wallet">
+          <i class="bi-wallet2 me-1"></i>
+          Wallet: ${{ "%.2f"|format(user_balance) }}
+        </a>
+        <a class="btn btn-outline-secondary" href="/cart">  
           <i class="bi-cart-fill me-1"></i>
           Cart
         </a>
+        <button id="theme-toggle" class="btn btn-outline-secondary ms-2" type="button" title="Toggle dark mode">
+          <i class="bi-moon-stars-fill" id="theme-icon"></i>
+        </button>
       </div>
     </div>
   </nav>
@@ -116,9 +134,44 @@
     </div>
   </footer>
   <!-- Bootstrap core JS-->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <!-- Core theme JS-->
   <script src="js/scripts.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggleBtn = document.getElementById('theme-toggle');
+      const themeIcon = document.getElementById('theme-icon');
+
+      const setTheme = (theme) => {
+        document.documentElement.setAttribute('data-bs-theme', theme);
+        localStorage.setItem('theme', theme);
+        if (theme === 'dark') {
+          themeIcon.classList.remove('bi-moon-stars-fill');
+          themeIcon.classList.add('bi-sun-fill');
+        } else {
+          themeIcon.classList.remove('bi-sun-fill');
+          themeIcon.classList.add('bi-moon-stars-fill');
+        }
+      };
+
+      // Set initial icon
+      if (document.documentElement.getAttribute('data-bs-theme') === 'dark') {
+        themeIcon.classList.replace('bi-moon-stars-fill', 'bi-sun-fill');
+      }
+
+      toggleBtn.addEventListener('click', () => {
+        const currentTheme = document.documentElement.getAttribute('data-bs-theme');
+        setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+      });
+
+      // Listen for system changes
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+        if (!localStorage.getItem('theme')) {
+          setTheme(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        }
+      });
+    });
+  </script>
 </body>
 
 </html>
